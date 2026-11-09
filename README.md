@@ -22,12 +22,11 @@
 ├── linkstack.cpp        # 链栈：初始化、入栈、出栈
 ├── linkqueue.cpp        # 链队：初始化、入队、出队、遍历输出、翻转
 ├── Applications01.cpp   # 线性表应用：随机生成、按基准值分割等
-├── Applications02.cpp   # 综合应用：括号链表的生成与输出（当前构建目标）
-├── CMakeLists.txt       # CMake 构建配置
+├── Applications02.cpp   # 综合应用：括号链表的生成与输出（还没写完）
 └── README.md
 ```
 
-各文件是独立的实验单元，`CMakeLists.txt` 里通过 `add_executable` 指定当前编译哪一个。切换实验时改这一行即可。虽然有点随意，但是我觉得能用就行，就懒得查更好的方法了。屎山代码也是代码嘛。
+各文件是独立的实验单元，`CMakeLists.txt` 里通过 `add_executable` 指定当前编译哪一个。切换实验时改这一行即可。虽然有点随意，但是我觉得能用就行，就懒得查更好的方法了。屎山代码也是代码嘛。当然`CMakeLists.txt`我没上传。
 
 ## 编译与运行
 
