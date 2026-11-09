@@ -1,0 +1,80 @@
+//
+// Created by Oblivion on 2026/11/9.
+//
+
+#include <iostream>
+#include <stdio.h>
+#include <time.h>
+#include <windows.h>
+
+//定义ElemType和Status
+typedef int ElemType;
+typedef bool Status;
+#define OK true
+
+//定义单链表节点
+typedef struct LNode {
+    ElemType data;
+    struct LNode *next;
+}LNode, *LinkList;
+
+//初始化单链表
+Status Init_LinkList(LinkList &L) {
+    L = new LNode;
+    L->next = NULL;
+    return OK;
+}
+
+//插入节点
+Status ListInsert(LinkList &L, int idx, ElemType e) {
+    auto *p = L;int i = 0;
+    while (p && i < idx - 1) {
+        p = p->next;
+        idx++;
+    }
+    auto s = new LNode;
+    s->data = e;
+    s->next = p->next;
+    p->next = s;
+    return OK;
+}
+
+//用随机函数生成 10 个 3 位整数(100~999)，把这些整数存于单链表中
+Status Insert10LNode(LinkList &L) {
+    int e = 0, i = 0;
+    while (i < 10) {
+        e = rand() &900 + 100;
+        ListInsert(L,1, e);
+        i++;
+    }
+    return OK;
+}
+
+//打印单链表
+void Print_LinkList(LinkList &L) {
+    LNode *p = L->next;
+    printf("[LinkList]");
+    while (p) {
+        printf("%d",p->data);
+        if (p->next != NULL) {
+            printf("->");
+        }
+        p = p->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    SetConsoleOutputCP(65001);   // 65001 = UTF-8
+    srand((unsigned)time(NULL)); //播种一次，暂不知原理
+
+    //创建并初始化单链表
+    LinkList L;
+    if (Init_LinkList(L) == OK) printf("[Init_LinkList]Successed\n");
+
+    //用随机函数生成 10 个 3 位整数(100~999)，把这些整数存于单链表中
+    if (Insert10LNode(L) == OK) printf("[Insert10LNode]Successed\n");
+    Print_LinkList(L);
+
+
+}
