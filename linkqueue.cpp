@@ -80,11 +80,23 @@ Status Init_LinkStack(LinkStack &S) {
 
 //入栈
 Status Push_LinkStack(LinkStack &S, ElemType e) {
+    if (e == -1) return ERROR;
     auto *p = new SNode;
     p->data = e;
     p->next = S;
     S = p;
     return OK;
+}
+
+//出栈，输入删除节点data
+ElemType Pop_LinkStack(LinkStack &S) {
+    auto *p = new SNode;
+    if (S = NULL) return -1;
+    ElemType e = S->data;
+    p = S;
+    S = p->next;
+    delete p;
+    return e;
 }
 
 //把队列的内容翻转
@@ -94,14 +106,22 @@ void Reverse_LinkQueue(LinkQueue &Q, LinkStack &S) {
     auto *q = new SNode;
 
     bool Push_is_OK;
+    bool En_is_OK;
 
     //逐一出队并入栈
     ElemType e;
     while (e != -1) {
         e = DeQueue(Q);
-        q->data = e;
         Push_is_OK = Push_LinkStack(S, e);
-        if (Push_is_OK != OK) printf("[Push]ERROR");
+        if (Push_is_OK != OK) printf("[Push]ERROR\n");
+    }
+
+    e = 0;//重置取值
+
+    //逐一出栈并入队
+    while (e != -1) {
+        e = Pop_LinkStack(S);
+        En_is_OK = EnQueue(Q, e);
     }
 
 
@@ -142,6 +162,7 @@ int main() {
 
     //翻转并入栈
     Reverse_LinkQueue(Q,S);
+    Print_LinkQueue(Q);
 
 
     return  0;
