@@ -39,6 +39,7 @@ Status InitQueue(LinkQueue &Q) {
 
 //入队
 Status EnQueue(LinkQueue &Q, ElemType e) {
+    if (e == -1) return ERROR;
     auto *p = new QNode;
     p->data = e;
     p->next = NULL;
@@ -88,10 +89,10 @@ Status Push_LinkStack(LinkStack &S, ElemType e) {
     return OK;
 }
 
-//出栈，输入删除节点data
+//出栈，输出删除节点data
 ElemType Pop_LinkStack(LinkStack &S) {
     auto *p = new SNode;
-    if (S = NULL) return -1;
+    if (S == NULL) return -1;
     ElemType e = S->data;
     p = S;
     S = p->next;
