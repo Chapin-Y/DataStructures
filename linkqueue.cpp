@@ -124,8 +124,18 @@ void Reverse_LinkQueue(LinkQueue &Q, LinkStack &S) {
         e = Pop_LinkStack(S);
         En_is_OK = EnQueue(Q, e);
     }
+}
 
-
+//应用出队操作输出队列的内容
+Status Print_ByDeQueue(LinkQueue &Q) {
+    ElemType e;
+    printf("Front");
+    while (Q.front != Q.rear) {
+        e = DeQueue(Q);
+        printf("->%d", e);
+    }
+    printf("->NULL");
+    return OK;
 }
 
 //main函数
@@ -163,7 +173,9 @@ int main() {
 
     //翻转并入栈
     Reverse_LinkQueue(Q,S);
-    Print_LinkQueue(Q);
+
+    //应用出队操作输出队列的内容
+    Print_ByDeQueue(Q);
 
 
     return  0;
