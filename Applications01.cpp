@@ -40,10 +40,10 @@ Status ListInsert(LinkList &L, int idx, ElemType e) {
 }
 
 //用随机函数生成 10 个 3 位整数(100~999)，把这些整数存于单链表中
-Status Insert10LNode(LinkList &L) {
+Status InsertLNodes(LinkList &L) {
     int e = 0, i = 0;
     while (i < 10) {
-        e = rand() &900 + 100;
+        e = rand() %900 + 100;
         ListInsert(L,1, e);
         i++;
     }
@@ -97,7 +97,7 @@ int main() {
     if (Init_LinkList(L) == OK) printf("[Init_LinkList]Successed\n");
 
     //用随机函数生成 10 个 3 位整数(100~999)，把这些整数存于单链表中
-    if (Insert10LNode(L) == OK) printf("[Insert10LNode]Successed\n");
+    if (InsertLNodes(L) == OK) printf("[Insert10LNode]Successed\n");
     Print_LinkList(L);
 
     //读入一个整数，以该值为基准把单链表分割为两部分，所有小于该值的结点排在大于或等于该值的结点之前
