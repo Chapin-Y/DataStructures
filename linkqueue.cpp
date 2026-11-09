@@ -41,6 +41,17 @@ Status EnQueue(LinkQueue &Q, ElemType e) {
     return OK;
 }
 
+//应用遍历操作输出队列的内容
+void Print_LinkQueue(LinkQueue &Q) {
+    auto *p = new QNode;
+    p = Q.front->next;
+    printf("Front");
+    while (p) {
+        printf("->%d", p->data);
+        p = p->next;
+    }
+    printf("->NULL\n");
+}
 
 //main函数
 int main() {
@@ -56,11 +67,14 @@ int main() {
     while (i < 10) {
         int e = rand() % 900 + 100;
         bool EnQueue_is_OK = EnQueue(Q, e);
-        if (EnQueue_is_OK = TRUE) {
-            printf("[EnQueue]Successful");
+        if (EnQueue_is_OK != TRUE) {
+            printf("[EnQueue]ERROR\n");
         }
         i++;
     }
+
+    //应用遍历操作输出队列的内容
+    Print_LinkQueue(Q);
 
     return  0;
 }
