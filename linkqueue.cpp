@@ -24,6 +24,12 @@ typedef struct {
     QueuePtr rear;
 }LinkQueue;
 
+//定义一个栈，用于翻转队列时临时存储节点
+typedef struct SNode {
+    ElemType data;
+    struct SNode *next;
+}SNode, *LinkStack;
+
 //链队的初始化
 Status InitQueue(LinkQueue &Q) {
     Q.front = Q.rear = new QNode;
@@ -41,6 +47,19 @@ Status EnQueue(LinkQueue &Q, ElemType e) {
     return OK;
 }
 
+//出队，修改：返回为删除节点的data
+ElemType DeQueue(LinkQueue &Q) {
+    ElemType e;
+    if (Q.rear == Q.front) return -1;
+    auto *p = new QNode;
+    p = Q.front->next;
+    e = p->data;
+    Q.front->next = p->next;
+    if (Q.rear == p) Q.rear = Q.front;//删到最后一个节点
+    delete p;
+    return e;
+}
+
 //应用遍历操作输出队列的内容
 void Print_LinkQueue(LinkQueue &Q) {
     auto *p = new QNode;
@@ -51,6 +70,41 @@ void Print_LinkQueue(LinkQueue &Q) {
         p = p->next;
     }
     printf("->NULL\n");
+}
+
+//创建栈用于临时存储队列内容
+Status Init_LinkStack(LinkStack &S) {
+    S = NULL;
+    return OK;
+}
+
+//入栈
+Status Push_LinkStack(LinkStack &S, ElemType e) {
+    auto *p = new SNode;
+    p->data = e;
+    p->next = S;
+    S = p;
+    return OK;
+}
+
+//把队列的内容翻转
+void Reverse_LinkQueue(LinkQueue &Q, LinkStack &S) {
+    //定义节点用于临时存储数据
+    auto *p = new QNode;
+    auto *q = new SNode;
+
+    bool Push_is_OK;
+
+    //逐一出队并入栈
+    ElemType e;
+    while (e != -1) {
+        e = DeQueue(Q);
+        q->data = e;
+        Push_is_OK = Push_LinkStack(S, e);
+        if (Push_is_OK != OK) printf("[Push]ERROR");
+    }
+
+
 }
 
 //main函数
@@ -75,6 +129,20 @@ int main() {
 
     //应用遍历操作输出队列的内容
     Print_LinkQueue(Q);
+
+    //把队列的内容翻转，应用出队操作输出队列的内容
+
+    //创建一个栈
+    LinkStack S = NULL;
+    bool Init_is_OK;
+    Init_is_OK = Init_LinkStack(S);
+    if (Init_is_OK != OK) {
+        printf("[InitStack]ERROR");
+    }
+
+    //翻转并入栈
+    Reverse_LinkQueue(Q,S);
+
 
     return  0;
 }
