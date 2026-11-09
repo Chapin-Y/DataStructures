@@ -64,6 +64,30 @@ void Print_LinkList(LinkList &L) {
     printf("\n");
 }
 
+//读入一个整数，以该值为基准把单链表分割为两部分，所有小于该值的结点排在大于或等于该值的结点之前
+Status Partition_LinkList(LinkList &L) {
+    int e = 0;
+    printf("[Partition]请读入一个整数:");
+    scanf("%d",&e);
+    printf("\n");
+
+    if (L->next == NULL) return OK;
+
+    LNode *p = L;
+    LNode *q;//双指针遍历
+    while (p->next != NULL) {
+        q = p->next;
+        if (q->data < e && p != L) { // 小于基准且不在头部，才搬
+            //头插法
+            p->next = q->next;
+            q->next = L->next;
+            L->next = q;
+        }
+        else p = p->next;  // 不搬才前进，防止跳过节点
+    }
+    return OK;
+}
+
 int main() {
     SetConsoleOutputCP(65001);   // 65001 = UTF-8
     srand((unsigned)time(NULL)); //播种一次，暂不知原理
@@ -74,6 +98,10 @@ int main() {
 
     //用随机函数生成 10 个 3 位整数(100~999)，把这些整数存于单链表中
     if (Insert10LNode(L) == OK) printf("[Insert10LNode]Successed\n");
+    Print_LinkList(L);
+
+    //读入一个整数，以该值为基准把单链表分割为两部分，所有小于该值的结点排在大于或等于该值的结点之前
+    if (Partition_LinkList(L) == OK) printf("[Partition_LinkList]Successed\n");
     Print_LinkList(L);
 
 
