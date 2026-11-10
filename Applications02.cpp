@@ -42,13 +42,11 @@ Status ListInsert(LinkList &L, int idx, ElemType e) {
 //用随机函数生成 10 个 3 位整数(100~999)，把这些整数存于单链表中
 Status InsertLNodes(LinkList &L) {
     char e[6] = {'(', ')', '[', ']', '{', '}'};
-    char s;
     int i = 0;
     int k;//0~5随机
     while (i < 10) {
         k = rand() %6;
-        s = e[k];
-        ListInsert(L, 1, s);
+        ListInsert(L, 1, e[k]);
         i++;
     }
     return OK;
