@@ -101,7 +101,6 @@ int Delete_LNode(LNode *h,int key) {
     q->next = p->next;
     free(p);
     return 1;
-
 }
 
 //把链表的内容翻转，输出链表的内容，要求不占用新的存储空间
