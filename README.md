@@ -22,7 +22,8 @@
 ├── linkstack.cpp        # 链栈：初始化、入栈、出栈
 ├── linkqueue.cpp        # 链队：初始化、入队、出队、遍历输出、翻转
 ├── Applications01.cpp   # 线性表应用：随机生成、按基准值分割等
-├── Applications02.cpp   # 综合应用：括号链表的生成与输出（还没写完）
+├── Applications02.cpp   # 综合应用：括号链表的生成与输出（部分AI，我觉得写的不好，已弃用）
+├── applications02.cpp   # 综合应用：括号匹配问题（上面这个文件的重写版）
 └── README.md
 ```
 
